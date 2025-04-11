@@ -1,27 +1,29 @@
-import React, { useState } from "react";
-import styles from "./Auth.module.css";
-import FlipCameraAndroidIcon from "@material-ui/icons/FlipCameraAndroid";
-import { useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { fetchAsyncLogin, fetchAsyncRegister } from "../features/authSlice";
+import React, { useState } from 'react';
+import styles from './Auth.module.css';
+import FlipCameraAndroidIcon from '@material-ui/icons/FlipCameraAndroid';
+import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { fetchAsyncLogin, fetchAsyncRegister } from '../features/authSlice';
 
 const Auth = () => {
   const history = useHistory();
   const dispatch = useDispatch();
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const [isLogin, setIsLogin] = useState(true);
-  const [successMsg, setSuccessMsg] = useState("");
+  const [successMsg, setSuccessMsg] = useState('');
 
   const login = async () => {
     const result = await dispatch(
       fetchAsyncLogin({ username: username, password: password })
     );
     if (fetchAsyncLogin.fulfilled.match(result)) {
-      setSuccessMsg("Successfully logged in!");
-      history.push("/vehicle");
+      setSuccessMsg('Successfully logged in!');
+      setTimeout(() => {
+        history.push('/vehicle');
+      }, 500);
     } else {
-      setSuccessMsg("Login error!");
+      setSuccessMsg('Login error!');
     }
   };
   const authUser = async (e) => {
@@ -35,7 +37,7 @@ const Auth = () => {
       if (fetchAsyncRegister.fulfilled.match(result)) {
         login();
       } else {
-        setSuccessMsg("Registration error!");
+        setSuccessMsg('Registration error!');
       }
     }
   };
@@ -62,7 +64,7 @@ const Auth = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <button type="submit">{isLogin ? "Login" : "Register"}</button>
+        <button type="submit">{isLogin ? 'Login' : 'Register'}</button>
         <div>
           <FlipCameraAndroidIcon
             data-testid="toggle-icon"

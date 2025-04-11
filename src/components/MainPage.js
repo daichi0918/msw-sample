@@ -1,12 +1,12 @@
-import React, { useEffect } from "react";
-import styles from "./MainPage.module.css";
-import Grid from "@material-ui/core/Grid";
-import { useHistory } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchAsyncGetProfile, selectProfile } from "../features/authSlice";
-import Segment from "./Segment";
-import Brand from "./Brand";
-import Vehicle from "./Vehicle";
+import React, { useEffect } from 'react';
+import styles from './MainPage.module.css';
+import Grid from '@material-ui/core/Grid';
+import { useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchAsyncGetProfile, selectProfile } from '../features/authSlice';
+import Segment from './Segment';
+import Brand from './Brand';
+import Vehicle from './Vehicle';
 
 const MainPage = () => {
   const history = useHistory();
@@ -14,8 +14,10 @@ const MainPage = () => {
   const profile = useSelector(selectProfile);
 
   const Logout = () => {
-    localStorage.removeItem("token");
-    history.push("/");
+    localStorage.removeItem('token');
+    setTimeout(() => {
+      history.push('/');
+    }, 500);
   };
 
   useEffect(() => {
